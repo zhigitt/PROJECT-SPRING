@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.extern.apachecommons.CommonsLog;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,7 +43,11 @@ public class User extends BaseEntityId {
     @OneToOne
     private Like like;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<Post>  posts;
 
+    public void addPost(Post post) {
+        if (this.posts == null) this.posts = new ArrayList<>();
+        this.posts.add(post);
+    }
 }

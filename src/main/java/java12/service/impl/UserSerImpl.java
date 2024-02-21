@@ -24,7 +24,7 @@ public class UserSerImpl implements UserService {
 
     @Override
     public User signIn(User user) {
-        currentUser= userRepo.signIn(user);
+        currentUser = userRepo.signIn(user);
         return currentUser;
     }
 

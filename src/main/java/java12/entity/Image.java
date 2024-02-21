@@ -21,6 +21,7 @@ public class Image extends BaseEntityId {
     @OneToMany(mappedBy = "image")
     private List<User> users;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Post post;
+
 }

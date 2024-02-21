@@ -25,7 +25,6 @@ public class PostController {
 
     @GetMapping("/newPost/{userId}")
     public String newPost(@PathVariable Long userId, Model model){
-//        List<Post> posts = userService.findById(userId).getPosts();
         model.addAttribute("newPost", new Post());
         model.addAttribute("userId",userId);
         return "/createPost";
@@ -33,8 +32,8 @@ public class PostController {
 
     @PostMapping("/savePost/{userId}")
     public String savePostt(@ModelAttribute("newPost") Post post,
-                            @PathVariable Long userId,String imageUrl){
+                            @PathVariable Long userId){
         postService.createPost(userId, post);
-        return "redirect:/userInfos";
+        return "redirect:/"+post.getId()+"/image/new";
     }
 }

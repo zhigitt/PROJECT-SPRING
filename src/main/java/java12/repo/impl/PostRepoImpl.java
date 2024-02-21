@@ -25,26 +25,11 @@ public class PostRepoImpl implements PostRepo {
 
     @Override
     public User createPost(Long userId, Post post) {
-        try {
-            User user = entityManager.find(User.class, userId);
-            if (user != null){
-                Image image = imageRepo.createImage(post.getImageUrl());
-
-                user.getPosts().add(post);
-                post.setUser(user);
-                post.getImages().add(image);
-
-                post.getImages().add(image);
-
-                entityManager.persist(post);
-                entityManager.merge(post);
-
-                return user;
-            }
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
+        User user = entityManager.find(User.class, userId);
+        user.addPost(post);
+        post.setUser(user);
+        entityManager.persist(post);
+        return user;
     }
 
     @Override

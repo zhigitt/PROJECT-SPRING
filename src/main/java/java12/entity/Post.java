@@ -21,18 +21,15 @@ public class Post extends BaseEntityId {
     @Column(name = "created_at")
     private LocalDate createdAt;
 
-    @Transient
-    private String imageUrl;
-
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "post")
-    private List<Image> images;
+    @OneToOne(mappedBy = "post", cascade = CascadeType.PERSIST)
+    private Image image;
 
     @OneToMany(mappedBy = "post")
     private List<Like> likes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 }

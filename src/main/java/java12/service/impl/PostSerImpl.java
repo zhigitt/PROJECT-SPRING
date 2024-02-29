@@ -32,6 +32,11 @@ public class PostSerImpl implements PostService {
     }
 
     @Override
+    public List<Post> getAllPosts() {
+        return postRepo.getAllPosts();
+    }
+
+    @Override
     public String updatePostById(Long postId) {
         return postRepo.updatePostById(postId);
     }

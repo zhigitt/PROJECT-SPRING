@@ -67,5 +67,13 @@ public class UserRepoImpl implements UserRepo {
         return Optional.ofNullable(entityManager.find(User.class, userID));
     }
 
+    @Override
+    public User getUserByName(String name) {
+        User user = entityManager.createQuery("select u from  User u where userName in :name", User.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        return user;
+    }
+
 
 }

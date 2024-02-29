@@ -47,4 +47,9 @@ public class UserSerImpl implements UserService {
     public User findById(Long userID) {
         return userRepo.findById(userID).orElseThrow(() -> new RuntimeException("User with id: "+" not found"));
     }
+
+    @Override
+    public User getUserByName(String name) {
+        return userRepo.getUserByName(name);
+    }
 }

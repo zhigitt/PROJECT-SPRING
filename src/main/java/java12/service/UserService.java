@@ -18,4 +18,6 @@ public interface UserService {
     void updateUser(Long userId, User newUser);
 
     User findById(Long userID);
+
+    User getUserByName(String name);
 }

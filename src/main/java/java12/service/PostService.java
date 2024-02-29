@@ -13,6 +13,7 @@ public interface PostService {
     Post getPostById(Long postId);
 
     List<Post> getAllPostsByUserId(Long userId);
+    List<Post> getAllPosts();
 
     String updatePostById(Long postId);
 

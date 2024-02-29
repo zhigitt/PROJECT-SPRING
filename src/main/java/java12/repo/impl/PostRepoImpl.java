@@ -39,8 +39,14 @@ public class PostRepoImpl implements PostRepo {
 
     @Override
     public List<Post> getAllPostsByUserId(Long userId) {
-        return entityManager.createQuery("select p from Post p where p.user.id = :usId", Post.class)
+        return entityManager.createQuery("select p from Post p where user.id = :usId", Post.class)
                 .setParameter("usId", userId)
+                .getResultList();
+    }
+
+    @Override
+    public List<Post> getAllPosts() {
+        return entityManager.createQuery("select p from Post p", Post.class)
                 .getResultList();
     }
 

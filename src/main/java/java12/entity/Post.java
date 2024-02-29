@@ -19,7 +19,7 @@ public class Post extends BaseEntityId {
     private String title;
     private String description;
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDate createdAt = LocalDate.now();
 
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;

@@ -17,4 +17,6 @@ public interface UserRepo {
     void updateUser(Long userId, User newUser);
 
     Optional<User> findById(Long userID);
+
+    User getUserByName(String name);
 }

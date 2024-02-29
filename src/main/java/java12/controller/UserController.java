@@ -2,15 +2,11 @@ package java12.controller;
 
 import java12.entity.User;
 import java12.service.UserService;
-import java12.service.impl.UserInfoSerImpl;
 import java12.service.impl.UserSerImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -64,5 +60,25 @@ public class UserController {
         model.addAttribute("newUser", userService.findById(UserSerImpl.currentUser.getId()));
         return "/profile";
     }
+
+    @GetMapping("/search/{userId}")
+    public String search(Model model, @PathVariable Long userId){
+        model.addAttribute("userId", userId);
+        model.addAttribute("allUsers", userService.getAllUsers());
+        return "/searchPage";
+    }
+
+    @GetMapping("/searchUser/{userId}")
+    public String searchUser(Model model, @RequestParam String name, @PathVariable Long userId){
+        model.addAttribute("userId", userId);
+        try {
+            model.addAttribute("currentUser", userService.getUserByName(name));
+            return "profSearchUser";
+        }catch (Exception e){
+            return "redirect:/users/searchPage";
+        }
+
+    }
+
 
 }

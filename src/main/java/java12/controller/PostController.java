@@ -3,6 +3,7 @@ package java12.controller;
 import java12.entity.Post;
 import java12.service.PostService;
 import java12.service.UserService;
+import java12.service.impl.UserSerImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,10 +18,22 @@ public class PostController {
     private final PostService postService;
     private final UserService userService;
 
-    @GetMapping
-    public String getAllPosts(@PathVariable("userId") Long userId, Model model) {
-        model.addAttribute("allPosts", postService.getAllPostsByUserId(userId));
+    @GetMapping("/myPost/{userId}")
+    public String getAllPosts(@PathVariable Long userId, Model model) {
+        model.addAttribute("allPosts", postService.getAllPostsByUserId(UserSerImpl.currentUser.getId()));
+        return "/myPosts";
+    }
+
+    @GetMapping("/posts")
+    public String getAllPostsByUserId(@PathVariable("userId") Long userId, Model model) {
+        model.addAttribute("allPosts", postService.getAllPostsByUserId(UserSerImpl.currentUser.getId()));
         return "/profile";
+    }
+
+    @GetMapping("/allPostsL")
+    public String getAllPosts(Model model) {
+        model.addAttribute("allPostsLenta", postService.getAllPosts());
+        return "/lenta";
     }
 
     @GetMapping("/newPost/{userId}")
